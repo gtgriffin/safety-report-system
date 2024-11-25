@@ -1,135 +1,109 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Safety Report System</title>
-    <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
-    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
-    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <base href="/safety-report-system/">
-</head>
-<body class="bg-gray-900">
-    <div id="root"></div>
-    <script type="text/babel">
-        function SafetyReport() {
-            const [area, setArea] = React.useState('');
-            const [description, setDescription] = React.useState('');
-            const [attachments, setAttachments] = React.useState([]);
-            const [submissionStatus, setSubmissionStatus] = React.useState('');
+<script type="text/babel">
+    function SafetyReport() {
+        const [area, setArea] = React.useState('');
+        const [description, setDescription] = React.useState('');
+        const [submissionStatus, setSubmissionStatus] = React.useState('');
 
-            const areas = [
-                'FRP', 
-                'Shipping', 
-                '5 Dry Side', 
-                '5 Wet Side', 
-                '6 Dry Side', 
-                '6 Wet Side'
-            ];
+        const areas = [
+            'FRP', 
+            'Shipping', 
+            '5 Dry Side', 
+            '5 Wet Side', 
+            '6 Dry Side', 
+            '6 Wet Side'
+        ];
 
-            const handleSubmit = async (e) => {
-                e.preventDefault();
-                
-                // Create form data for email
-                const formData = new FormData();
-                formData.append('email', 'gtgriffin21@gmail.com');
-                formData.append('subject', `Safety Report - ${area}`);
-                formData.append('message', `Area: ${area}\n\nDescription: ${description}`);
-                
-                try {
-                    const response = await fetch('https://formsubmit.co/ajax/Garrett.Griffin@sttissuellc.com', {
-                        method: 'POST',
-                        body: formData
-                    });
+        const handleSubmit = async (e) => {
+            e.preventDefault();
 
-                    if (response.ok) {
-                        setSubmissionStatus('Report submitted successfully! Email sent.');
-                        // Reset form
-                        setArea('');
-                        setDescription('');
-                        setAttachments([]);
-                    } else {
-                        setSubmissionStatus('Failed to submit report. Please try again.');
-                    }
-                } catch (error) {
-                    console.error('Error:', error);
-                    setSubmissionStatus('An error occurred. Please try again.');
+            // Create form data for FormSubmit
+            const formData = new FormData();
+            formData.append('email', 'gtgriffin21@gmail.com'); // Your receiving email
+            formData.append('_subject', `Safety Report - ${area}`);
+            formData.append('_autoresponse', 'Thank you for submitting your safety report. We will review it shortly.');
+            formData.append('Area', area); // Custom field
+            formData.append('Description', description); // Custom field
+
+            try {
+                const response = await fetch('https://formsubmit.co/ajax/gtgriffin21@gmail.com', {
+                    method: 'POST',
+                    body: formData
+                });
+
+                if (response.ok) {
+                    setSubmissionStatus('Report submitted successfully! Email sent.');
+                    // Reset form
+                    setArea('');
+                    setDescription('');
+                } else {
+                    setSubmissionStatus('Failed to submit report. Please try again.');
                 }
-            };
+            } catch (error) {
+                console.error('Error:', error);
+                setSubmissionStatus('An error occurred. Please try again.');
+            }
+        };
 
-            return (
-                <div className="max-w-md mx-auto p-4 min-h-screen flex items-center justify-center">
-                    <div className="w-full bg-gray-800 text-white border-2 border-blue-600 rounded-xl shadow-2xl p-6">
-                        <div className="bg-blue-900 bg-opacity-50 py-4 rounded-t-xl -mt-6 -mx-6 mb-6 px-6">
-                            <h1 className="text-2xl font-bold text-white text-center">
-                                Safety Hazard Report
-                            </h1>
+        return (
+            <div className="max-w-md mx-auto p-4 min-h-screen flex items-center justify-center">
+                <div className="w-full bg-gray-800 text-white border-2 border-blue-600 rounded-xl shadow-2xl p-6">
+                    <div className="bg-blue-900 bg-opacity-50 py-4 rounded-t-xl -mt-6 -mx-6 mb-6 px-6">
+                        <h1 className="text-2xl font-bold text-white text-center">
+                            Safety Hazard Report
+                        </h1>
+                    </div>
+
+                    <form onSubmit={handleSubmit} className="space-y-4">
+                        <div>
+                            <label className="block mb-2 text-gray-300 font-semibold">Area</label>
+                            <select
+                                value={area}
+                                onChange={(e) => setArea(e.target.value)}
+                                className="w-full bg-gray-700 text-white border-blue-600 rounded-md p-2"
+                                required
+                            >
+                                <option value="">Select Area</option>
+                                {areas.map(areaName => (
+                                    <option key={areaName} value={areaName}>
+                                        {areaName}
+                                    </option>
+                                ))}
+                            </select>
                         </div>
 
-                        <form onSubmit={handleSubmit} className="space-y-4">
-                            <div>
-                                <label className="block mb-2 text-gray-300 font-semibold">Area</label>
-                                <select
-                                    value={area}
-                                    onChange={(e) => setArea(e.target.value)}
-                                    className="w-full bg-gray-700 text-white border-blue-600 rounded-md p-2"
-                                    required
-                                >
-                                    <option value="">Select Area</option>
-                                    {areas.map(areaName => (
-                                        <option key={areaName} value={areaName}>
-                                            {areaName}
-                                        </option>
-                                    ))}
-                                </select>
+                        <div>
+                            <label className="block mb-2 text-gray-300 font-semibold">Description of Hazard</label>
+                            <textarea
+                                value={description}
+                                onChange={(e) => setDescription(e.target.value)}
+                                placeholder="Describe the safety hazard in detail"
+                                className="w-full bg-gray-700 text-white border-blue-600 rounded-md p-2 min-h-[100px]"
+                                required
+                            />
+                        </div>
+
+                        {submissionStatus && (
+                            <div className={`p-3 rounded-lg text-center font-semibold ${
+                                submissionStatus.includes('successfully') 
+                                    ? 'bg-green-800 text-green-100' 
+                                    : 'bg-red-800 text-red-100'
+                            }`}>
+                                {submissionStatus}
                             </div>
+                        )}
 
-                            <div>
-                                <label className="block mb-2 text-gray-300 font-semibold">Description of Hazard</label>
-                                <textarea
-                                    value={description}
-                                    onChange={(e) => setDescription(e.target.value)}
-                                    placeholder="Describe the safety hazard in detail"
-                                    className="w-full bg-gray-700 text-white border-blue-600 rounded-md p-2 min-h-[100px]"
-                                    required
-                                />
-                            </div>
-
-                            <div>
-                                <label className="block mb-2 text-gray-300 font-semibold">Attachments</label>
-                                <input
-                                    type="file"
-                                    multiple
-                                    onChange={(e) => setAttachments(Array.from(e.target.files))}
-                                    className="w-full bg-gray-700 text-white border-blue-600 rounded-md p-2"
-                                />
-                            </div>
-
-                            {submissionStatus && (
-                                <div className={`p-3 rounded-lg text-center font-semibold ${
-                                    submissionStatus.includes('successfully') 
-                                        ? 'bg-green-800 text-green-100' 
-                                        : 'bg-red-800 text-red-100'
-                                }`}>
-                                    {submissionStatus}
-                                </div>
-                            )}
-
-                            <button
-                                type="submit"
-                                className="w-full bg-blue-700 hover:bg-blue-600 text-white font-bold py-3 rounded-lg transition-colors duration-300 ease-in-out"
-                                disabled={!area || !description}
-                            >
-                                Submit Safety Report
-                            </button>
-                        </form>
-                    </div>
+                        <button
+                            type="submit"
+                            className="w-full bg-blue-700 hover:bg-blue-600 text-white font-bold py-3 rounded-lg transition-colors duration-300 ease-in-out"
+                            disabled={!area || !description}
+                        >
+                            Submit Safety Report
+                        </button>
+                    </form>
                 </div>
-            );
-        }
+            </div>
+        );
+    }
 
-        ReactDOM.render(<SafetyReport />, document.getElementById('root'));
-    </script>
-</body>
-</html>
+    ReactDOM.render(<SafetyReport />, document.getElementById('root'));
+</script>
