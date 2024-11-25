@@ -8,7 +8,6 @@
     <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
     <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
     <script src="https://cdn.tailwindcss.com"></script>
-    <base href="/safety-report-system/">
 </head>
 <body class="bg-gray-900">
     <div id="root"></div>
@@ -17,7 +16,6 @@
             const [area, setArea] = React.useState('');
             const [description, setDescription] = React.useState('');
             const [attachments, setAttachments] = React.useState([]);
-            const [submissionStatus, setSubmissionStatus] = React.useState('');
 
             const areas = [
                 'FRP', 
@@ -28,22 +26,6 @@
                 '6 Wet Side'
             ];
 
-            const handleSubmit = (e) => {
-                e.preventDefault();
-                // Here you would typically send to a server
-                setSubmissionStatus('Report submitted successfully!');
-                console.log({
-                    area,
-                    description,
-                    attachments,
-                    recipient: 'gtgriffin21@gmail.com'
-                });
-                // Reset form
-                setArea('');
-                setDescription('');
-                setAttachments([]);
-            };
-
             return (
                 <div className="max-w-md mx-auto p-4 min-h-screen flex items-center justify-center">
                     <div className="w-full bg-gray-800 text-white border-2 border-blue-600 rounded-xl shadow-2xl p-6">
@@ -53,10 +35,17 @@
                             </h1>
                         </div>
 
-                        <form onSubmit={handleSubmit} className="space-y-4">
+                        <form action="https://formsubmit.co/Garrett.Griffin@sttissuellc.com" method="POST" className="space-y-4">
+                            {/* These hidden inputs customize the email */}
+                            <input type="hidden" name="_subject" value="Safety Report Submission" />
+                            <input type="hidden" name="_template" value="table" />
+                            <input type="hidden" name="_captcha" value="false" />
+                            <input type="hidden" name="_next" value="https://gtgriffin.github.io/safety-report-system/" />
+
                             <div>
                                 <label className="block mb-2 text-gray-300 font-semibold">Area</label>
                                 <select
+                                    name="Area"
                                     value={area}
                                     onChange={(e) => setArea(e.target.value)}
                                     className="w-full bg-gray-700 text-white border-blue-600 rounded-md p-2"
@@ -74,6 +63,7 @@
                             <div>
                                 <label className="block mb-2 text-gray-300 font-semibold">Description of Hazard</label>
                                 <textarea
+                                    name="Description"
                                     value={description}
                                     onChange={(e) => setDescription(e.target.value)}
                                     placeholder="Describe the safety hazard in detail"
@@ -86,17 +76,12 @@
                                 <label className="block mb-2 text-gray-300 font-semibold">Attachments</label>
                                 <input
                                     type="file"
+                                    name="attachment"
                                     multiple
                                     onChange={(e) => setAttachments(Array.from(e.target.files))}
                                     className="w-full bg-gray-700 text-white border-blue-600 rounded-md p-2"
                                 />
                             </div>
-
-                            {submissionStatus && (
-                                <div className="p-3 rounded-lg text-center font-semibold bg-green-800 text-green-100">
-                                    {submissionStatus}
-                                </div>
-                            )}
 
                             <button
                                 type="submit"
