@@ -27,45 +27,13 @@
                 </h1>
             </div>
 
-            <!-- FormBold Form with POST Method -->
+            <!-- FormBold Form -->
             <form 
                 action="https://formbold.com/s/oD2kb" 
                 method="POST" 
                 class="space-y-4">
                 
-                <!-- Email Field -->
-                <div>
-                    <label class="block mb-2 text-gray-300 font-semibold">Email</label>
-                    <input 
-                        type="email" 
-                        name="email" 
-                        placeholder="Enter your email" 
-                        class="w-full bg-gray-700 text-white border-blue-600 rounded-md p-2" 
-                        required>
-                </div>
-
-                <!-- Subject Field -->
-                <div>
-                    <label class="block mb-2 text-gray-300 font-semibold">Subject</label>
-                    <input 
-                        type="text" 
-                        name="subject" 
-                        placeholder="Enter the subject" 
-                        class="w-full bg-gray-700 text-white border-blue-600 rounded-md p-2" 
-                        required>
-                </div>
-
-                <!-- Message Field -->
-                <div>
-                    <label class="block mb-2 text-gray-300 font-semibold">Message</label>
-                    <textarea 
-                        name="message" 
-                        placeholder="Type your message" 
-                        class="w-full bg-gray-700 text-white border-blue-600 rounded-md p-2 min-h-[100px]" 
-                        required></textarea>
-                </div>
-
-                <!-- Your Other Form Fields -->
+                <!-- Area Selection -->
                 <div>
                     <label class="block mb-2 text-gray-300 font-semibold">Area</label>
                     <select 
@@ -82,6 +50,7 @@
                     </select>
                 </div>
 
+                <!-- Hazard Type -->
                 <div>
                     <label class="block mb-2 text-gray-300 font-semibold">Hazard Type</label>
                     <select 
@@ -98,6 +67,7 @@
                     </select>
                 </div>
 
+                <!-- Severity Rating -->
                 <div>
                     <label class="block mb-2 text-gray-300 font-semibold">Severity Rating</label>
                     <select 
@@ -110,6 +80,16 @@
                         <option value="High">High</option>
                         <option value="Critical">Critical</option>
                     </select>
+                </div>
+
+                <!-- Message Field -->
+                <div>
+                    <label class="block mb-2 text-gray-300 font-semibold">Message</label>
+                    <textarea 
+                        name="message" 
+                        placeholder="Describe the safety hazard in detail" 
+                        class="w-full bg-gray-700 text-white border-blue-600 rounded-md p-2 min-h-[100px]" 
+                        required></textarea>
                 </div>
 
                 <!-- Submit Button -->
