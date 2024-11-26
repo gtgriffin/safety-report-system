@@ -27,20 +27,49 @@
                 </h1>
             </div>
 
-            <!-- Web3Forms Form -->
+            <!-- FormBold Form Integration -->
             <form 
-                action="https://api.web3forms.com/submit" 
+                action="https://formbold.com/s/oD2kb" 
                 method="POST" 
                 class="space-y-4">
                 
-                <!-- Web3Forms Correct Access Key -->
-                <input type="hidden" name="access_key" value="402b1052-bcb6-474f-ab5c-9fbee193947e">
+                <!-- Email Field -->
+                <div>
+                    <label class="block mb-2 text-gray-300 font-semibold">Email</label>
+                    <input 
+                        type="email" 
+                        name="email" 
+                        placeholder="Enter your email" 
+                        class="w-full bg-gray-700 text-white border-blue-600 rounded-md p-2" 
+                        required>
+                </div>
 
-                <!-- Area Selection -->
+                <!-- Subject Field -->
+                <div>
+                    <label class="block mb-2 text-gray-300 font-semibold">Subject</label>
+                    <input 
+                        type="text" 
+                        name="subject" 
+                        placeholder="Enter the subject" 
+                        class="w-full bg-gray-700 text-white border-blue-600 rounded-md p-2" 
+                        required>
+                </div>
+
+                <!-- Message Field -->
+                <div>
+                    <label class="block mb-2 text-gray-300 font-semibold">Message</label>
+                    <textarea 
+                        name="message" 
+                        placeholder="Type your message" 
+                        class="w-full bg-gray-700 text-white border-blue-600 rounded-md p-2 min-h-[100px]" 
+                        required></textarea>
+                </div>
+
+                <!-- Your Other Form Fields -->
                 <div>
                     <label class="block mb-2 text-gray-300 font-semibold">Area</label>
                     <select 
-                        name="Area" 
+                        name="area" 
                         class="w-full bg-gray-700 text-white border-blue-600 rounded-md p-2" 
                         required>
                         <option value="">Select Area</option>
@@ -53,11 +82,10 @@
                     </select>
                 </div>
 
-                <!-- Hazard Type -->
                 <div>
                     <label class="block mb-2 text-gray-300 font-semibold">Hazard Type</label>
                     <select 
-                        name="HazardType" 
+                        name="hazard_type" 
                         class="w-full bg-gray-700 text-white border-blue-600 rounded-md p-2" 
                         required>
                         <option value="">Select Hazard Type</option>
@@ -70,11 +98,10 @@
                     </select>
                 </div>
 
-                <!-- Severity Rating -->
                 <div>
                     <label class="block mb-2 text-gray-300 font-semibold">Severity Rating</label>
                     <select 
-                        name="SeverityRating" 
+                        name="severity_rating" 
                         class="w-full bg-gray-700 text-white border-blue-600 rounded-md p-2" 
                         required>
                         <option value="">Select Severity Rating</option>
@@ -85,16 +112,6 @@
                     </select>
                 </div>
 
-                <!-- Description -->
-                <div>
-                    <label class="block mb-2 text-gray-300 font-semibold">Description of Hazard</label>
-                    <textarea 
-                        name="Description" 
-                        placeholder="Describe the safety hazard in detail"
-                        class="w-full bg-gray-700 text-white border-blue-600 rounded-md p-2 min-h-[100px]" 
-                        required></textarea>
-                </div>
-
                 <!-- Submit Button -->
                 <button 
                     type="submit" 
@@ -102,9 +119,6 @@
                     Submit Safety Report
                 </button>
             </form>
-
-            <!-- Submission Status -->
-            <div id="submission-status" class="mt-4 hidden p-3 rounded-lg text-center font-semibold"></div>
         </div>
     </div>
 </body>
