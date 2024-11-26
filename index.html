@@ -31,6 +31,7 @@
             <form 
                 action="https://formsubmit.co/61b0b3a2d6bf08cfd349e182230f3fbd" 
                 method="POST" 
+                enctype="multipart/form-data"
                 class="space-y-4"
                 onsubmit="return handleFormSubmit(event)">
                 
@@ -44,10 +45,10 @@
                         <option value="">Select Area</option>
                         <option value="FRP">FRP</option>
                         <option value="Shipping">Shipping</option>
-                        <option value="5 Dry Side">5 Dry Side</option>
-                        <option value="5 Wet Side">5 Wet Side</option>
-                        <option value="6 Dry Side">6 Dry Side</option>
-                        <option value="6 Wet Side">6 Wet Side</option>
+                        <option value="5 Dry End">5 Dry End</option>
+                        <option value="5 Wet End">5 Wet End</option>
+                        <option value="6 Dry End">6 Dry End</option>
+                        <option value="6 Wet End">6 Wet End</option>
                     </select>
                 </div>
 
@@ -91,6 +92,17 @@
                         placeholder="Describe the safety hazard in detail"
                         class="w-full bg-gray-700 text-white border-blue-600 rounded-md p-2 min-h-[100px]" 
                         required></textarea>
+                </div>
+
+                <!-- Photo Upload -->
+                <div>
+                    <label class="block mb-2 text-gray-300 font-semibold">Upload Photo (Optional)</label>
+                    <input 
+                        type="file" 
+                        name="Photo" 
+                        accept="image/*"
+                        class="w-full bg-gray-700 text-white border-blue-600 rounded-md p-2"
+                    />
                 </div>
 
                 <!-- Submit Button -->
