@@ -1,86 +1,123 @@
-<form 
-    action="https://api.web3forms.com/submit" 
-    method="POST" 
-    enctype="multipart/form-data" 
-    class="space-y-4">
-    
-    <!-- Web3Forms Access Key -->
-    <input type="hidden" name="access_key" value="2b18b479-27f8-491b-bd91-10383a0faa7e">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Safety Report System</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Ensure body background is dark */
+        body {
+            background-color: #1a202c; /* Tailwind bg-gray-900 */
+        }
+    </style>
+</head>
+<body>
+    <div id="root" class="max-w-md mx-auto p-4 min-h-screen flex items-center justify-center">
+        <div class="w-full bg-gray-800 text-white border-2 border-blue-600 rounded-xl shadow-2xl p-6">
+            <!-- "ST Tissue" Header -->
+            <div class="text-center mt-2 mb-6">
+                <h2 class="text-2xl font-extrabold text-blue-400 tracking-wide">ST Tissue</h2>
+            </div>
 
-    <!-- Area Selection -->
-    <div>
-        <label class="block mb-2 text-gray-300 font-semibold">Area</label>
-        <select 
-            name="Area" 
-            class="w-full bg-gray-700 text-white border-blue-600 rounded-md p-2" 
-            required>
-            <option value="">Select Area</option>
-            <option value="FRP">FRP</option>
-            <option value="Shipping">Shipping</option>
-            <option value="5 Dry End">5 Dry End</option>
-            <option value="5 Wet End">5 Wet End</option>
-            <option value="6 Dry End">6 Dry End</option>
-            <option value="6 Wet End">6 Wet End</option>
-        </select>
+            <div class="bg-blue-900 bg-opacity-50 py-4 rounded-t-xl -mt-6 -mx-6 mb-6 px-6">
+                <h1 class="text-2xl font-bold text-white text-center">
+                    Safety Hazard Report
+                </h1>
+            </div>
+
+            <!-- Web3Forms Form -->
+            <form 
+                action="https://api.web3forms.com/submit" 
+                method="POST" 
+                enctype="multipart/form-data"
+                class="space-y-4">
+                
+                <!-- Web3Forms Access Key -->
+                <input type="hidden" name="access_key" value="2b18b479-27f8-491b-bd91-10383a0faa7e">
+
+                <!-- Area Selection -->
+                <div>
+                    <label class="block mb-2 text-gray-300 font-semibold">Area</label>
+                    <select 
+                        name="Area" 
+                        class="w-full bg-gray-700 text-white border-blue-600 rounded-md p-2" 
+                        required>
+                        <option value="">Select Area</option>
+                        <option value="FRP">FRP</option>
+                        <option value="Shipping">Shipping</option>
+                        <option value="5 Dry End">5 Dry End</option>
+                        <option value="5 Wet End">5 Wet End</option>
+                        <option value="6 Dry End">6 Dry End</option>
+                        <option value="6 Wet End">6 Wet End</option>
+                    </select>
+                </div>
+
+                <!-- Hazard Type -->
+                <div>
+                    <label class="block mb-2 text-gray-300 font-semibold">Hazard Type</label>
+                    <select 
+                        name="HazardType" 
+                        class="w-full bg-gray-700 text-white border-blue-600 rounded-md p-2" 
+                        required>
+                        <option value="">Select Hazard Type</option>
+                        <option value="Slip, Trip, or Fall Hazard">Slip, Trip, or Fall Hazard</option>
+                        <option value="Blocked or Obstructed Pathway">Blocked or Obstructed Pathway</option>
+                        <option value="Leaking Fluid or Spill">Leaking Fluid or Spill</option>
+                        <option value="Stacking or Storage Issue">Stacking or Storage Issue</option>
+                        <option value="Unsecured Machinery or Equipment">Unsecured Machinery or Equipment</option>
+                        <option value="Other">Other</option>
+                    </select>
+                </div>
+
+                <!-- Severity Rating -->
+                <div>
+                    <label class="block mb-2 text-gray-300 font-semibold">Severity Rating</label>
+                    <select 
+                        name="SeverityRating" 
+                        class="w-full bg-gray-700 text-white border-blue-600 rounded-md p-2" 
+                        required>
+                        <option value="">Select Severity Rating</option>
+                        <option value="Low">Low</option>
+                        <option value="Medium">Medium</option>
+                        <option value="High">High</option>
+                        <option value="Critical">Critical</option>
+                    </select>
+                </div>
+
+                <!-- Description -->
+                <div>
+                    <label class="block mb-2 text-gray-300 font-semibold">Description of Hazard</label>
+                    <textarea 
+                        name="Description" 
+                        placeholder="Describe the safety hazard in detail"
+                        class="w-full bg-gray-700 text-white border-blue-600 rounded-md p-2 min-h-[100px]" 
+                        required></textarea>
+                </div>
+
+                <!-- Photo Upload -->
+                <div>
+                    <label class="block mb-2 text-gray-300 font-semibold">Upload Photo (Optional)</label>
+                    <input 
+                        type="file" 
+                        name="Photo" 
+                        accept="image/*"
+                        class="w-full bg-gray-700 text-white border-blue-600 rounded-md p-2"
+                    />
+                </div>
+
+                <!-- Submit Button -->
+                <button 
+                    type="submit" 
+                    class="w-full bg-blue-700 hover:bg-blue-600 text-white font-bold py-3 rounded-lg transition-colors duration-300 ease-in-out">
+                    Submit Safety Report
+                </button>
+            </form>
+
+            <!-- Submission Status -->
+            <div id="submission-status" class="mt-4 hidden p-3 rounded-lg text-center font-semibold"></div>
+        </div>
     </div>
-
-    <!-- Hazard Type -->
-    <div>
-        <label class="block mb-2 text-gray-300 font-semibold">Hazard Type</label>
-        <select 
-            name="HazardType" 
-            class="w-full bg-gray-700 text-white border-blue-600 rounded-md p-2" 
-            required>
-            <option value="">Select Hazard Type</option>
-            <option value="Slip, Trip, or Fall Hazard">Slip, Trip, or Fall Hazard</option>
-            <option value="Blocked or Obstructed Pathway">Blocked or Obstructed Pathway</option>
-            <option value="Leaking Fluid or Spill">Leaking Fluid or Spill</option>
-            <option value="Stacking or Storage Issue">Stacking or Storage Issue</option>
-            <option value="Unsecured Machinery or Equipment">Unsecured Machinery or Equipment</option>
-            <option value="Other">Other</option>
-        </select>
-    </div>
-
-    <!-- Severity Rating -->
-    <div>
-        <label class="block mb-2 text-gray-300 font-semibold">Severity Rating</label>
-        <select 
-            name="SeverityRating" 
-            class="w-full bg-gray-700 text-white border-blue-600 rounded-md p-2" 
-            required>
-            <option value="">Select Severity Rating</option>
-            <option value="Low">Low</option>
-            <option value="Medium">Medium</option>
-            <option value="High">High</option>
-            <option value="Critical">Critical</option>
-        </select>
-    </div>
-
-    <!-- Description -->
-    <div>
-        <label class="block mb-2 text-gray-300 font-semibold">Description of Hazard</label>
-        <textarea 
-            name="Description" 
-            placeholder="Describe the safety hazard in detail"
-            class="w-full bg-gray-700 text-white border-blue-600 rounded-md p-2 min-h-[100px]" 
-            required></textarea>
-    </div>
-
-    <!-- Photo Upload -->
-    <div>
-        <label class="block mb-2 text-gray-300 font-semibold">Upload Photo (Optional)</label>
-        <input 
-            type="file" 
-            name="Photo" 
-            accept="image/*"
-            class="w-full bg-gray-700 text-white border-blue-600 rounded-md p-2"
-        />
-    </div>
-
-    <!-- Submit Button -->
-    <button 
-        type="submit" 
-        class="w-full bg-blue-700 hover:bg-blue-600 text-white font-bold py-3 rounded-lg transition-colors duration-300 ease-in-out">
-        Submit Safety Report
-    </button>
-</form>
+</body>
+</html>
